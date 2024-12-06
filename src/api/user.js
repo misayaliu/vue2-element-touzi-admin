@@ -4,8 +4,9 @@ import request from '@/utils/axios'
 export function login(params) {
   return request({
     url: '/user/login',
-    method: 'get',
-    data:params
+    method: 'post',
+    data: params,
+    contentType: 'application/x-www-form-urlencoded'
   })
 }
 export function logout(params) {

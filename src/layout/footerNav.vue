@@ -5,9 +5,9 @@
             <a :href='github' target="_blank">
                <icon-svg icon-class="iconGithub" />
             </a>
-            <span>wdlhao2013({{ $t('commons.wechatNumber') }})</span>
+            <span>diyitongjin2023</span>
         </p>
-        <p class="beian">鄂ICP备18001612号</p>
+        <p class="beian">粤ICP备2023043241号</p>
     </div>
 </template>
 

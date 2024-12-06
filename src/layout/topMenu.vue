@@ -1,9 +1,9 @@
 
 <template>
-    <div class="menu_top wflex rflex" ref="menuTop">
+    <div class="menu_top wflex " ref="menuTop">
         <el-menu 
             mode="horizontal" 
-            class="el-menu-demo rflex el-scrollbar2 top-scrollbar2" 
+            class="el-menu-demo  el-scrollbar2 top-scrollbar2"
             :background-color="menuObj.bgColor"
             :text-color="menuObj.textColor"
             :active-text-color="menuObj.activeTextColor"

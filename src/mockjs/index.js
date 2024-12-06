@@ -20,7 +20,7 @@ Mock.mock(/\/money\/edit/, 'get', tableAPI.updateMoney)
 // sales相关
 Mock.mock(/\/sales\/get/, 'get', salesAPI.getSalesList)
 // user相关
-Mock.mock(/\/user\/login/, 'get', userAPI.login)
+// Mock.mock(/\/user\/login/, 'get', userAPI.login)
 Mock.mock(/\/user\/logout/, 'get', userAPI.logout)
 Mock.mock(/\/user\/info\/get/, 'get', userAPI.getUserInfo)
 Mock.mock(/\/user\/list\/get/, 'get', userAPI.getUserList)

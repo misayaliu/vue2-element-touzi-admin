@@ -5,43 +5,43 @@
             <div class="userinfo-right rflex">
                 <div class="notify-row">
                     <ul class="top-menu">
-                        <li class="li-badge">
-                            <el-tooltip class="item" effect="dark" content="访问github" placement="top">
-                                <a :href='github' target="_blank">
-                                      <icon-svg icon-class="iconGithub" />
-                                </a>
-                            </el-tooltip>
-                        </li>
-                        <li class="li-badge">
-                            <a :href='github' target="_blank" v-popover:qcode>
-                                <icon-svg icon-class="iconwechat" />
-                                <el-popover
-                                    ref="qcode"
-                                    popper-class="qcodepopper"
-                                    placement="bottom"
-                                    trigger="hover">
-                                        <div class="wechat-area cflex">
-                                            <p class="titles">加我微信</p>
-                                            <img :src="wechat.wechatImg" alt="加我微信"  />
-                                        </div>
-                               </el-popover>
-                            </a>
-                        </li>
-                        <li class="li-badge">
-                            <a :href='github' target="_blank" v-popover:qqcode>
-						        <icon-svg icon-class="iconqq" />
-                                 <el-popover
-                                    ref="qqcode"
-                                    popper-class="qcodepopper"
-                                    placement="bottom"
-                                    trigger="hover">
-                                        <div class="wechat-area cflex">
-                                            <p class="titles">加入qq群</p>
-                                            <img :src="qq.qqImg" alt="加入qq群"  />
-                                        </div>
-                                </el-popover>
-                            </a>
-                        </li>
+<!--                        <li class="li-badge">-->
+<!--                            <el-tooltip class="item" effect="dark" content="访问github" placement="top">-->
+<!--                                <a :href='github' target="_blank">-->
+<!--                                      <icon-svg icon-class="iconGithub" />-->
+<!--                                </a>-->
+<!--                            </el-tooltip>-->
+<!--                        </li>-->
+<!--                        <li class="li-badge">-->
+<!--                            <a :href='github' target="_blank" v-popover:qcode>-->
+<!--                                <icon-svg icon-class="iconwechat" />-->
+<!--                                <el-popover-->
+<!--                                    ref="qcode"-->
+<!--                                    popper-class="qcodepopper"-->
+<!--                                    placement="bottom"-->
+<!--                                    trigger="hover">-->
+<!--                                        <div class="wechat-area cflex">-->
+<!--                                            <p class="titles">加我微信</p>-->
+<!--                                            <img :src="wechat.wechatImg" alt="加我微信"  />-->
+<!--                                        </div>-->
+<!--                               </el-popover>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="li-badge">-->
+<!--                            <a :href='github' target="_blank" v-popover:qqcode>-->
+<!--						        <icon-svg icon-class="iconqq" />-->
+<!--                                 <el-popover-->
+<!--                                    ref="qqcode"-->
+<!--                                    popper-class="qcodepopper"-->
+<!--                                    placement="bottom"-->
+<!--                                    trigger="hover">-->
+<!--                                        <div class="wechat-area cflex">-->
+<!--                                            <p class="titles">加入qq群</p>-->
+<!--                                            <img :src="qq.qqImg" alt="加入qq群"  />-->
+<!--                                        </div>-->
+<!--                                </el-popover>-->
+<!--                            </a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
                 <div class="userinfo">
@@ -67,9 +67,9 @@
                             <template slot="title">
                                 <div class='welcome'>
                                     <span class="name">{{$t('commons.hi')}},</span>
-                                    <span class='name avatarname'> {{ $t(`commons.${name}`)}}</span>
+                                    <span class='name avatarname'> {{ $t(`${name}`)}}</span>
                                 </div>
-                                <img :src="avatar" class='avatar' alt="">
+                                <img :src="logo" class='avatar' alt="">
                             </template>
                             <el-menu-item index="2-1" @click="setDialogInfo('info')">{{ $t('commons.infoShow') }}</el-menu-item>
                             <el-menu-item index="2-2" @click="setDialogInfo('pass')">{{ $t('commons.infoModify') }}</el-menu-item>

@@ -7,40 +7,31 @@ const resolve = dir => {
   return path.join(__dirname, dir);
 };
 
+
 const env = process.env.NODE_ENV
 let target = process.env.VUE_APP_URL  // development和production环境是不同的
 
 const cdn = {
   // 开发环境
   dev: {
-      css: [],
-      js: [
-      ]
+    css: [],
+    js: [
+    ]
   },
   // 生产环境
   build: {
-      css: [
-        'https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css',
-        'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-      ],
-      js: [
-        'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
-        'https://cdn.bootcss.com/vue-router/3.1.2/vue-router.min.js',
-        'https://cdn.bootcss.com/vuex/2.3.1/vuex.min.js',
-        'https://cdn.bootcss.com/axios/0.19.0/axios.min.js',
-        'https://cdn.bootcss.com/vue-i18n/8.13.0/vue-i18n.min.js',
-        'https://cdn.bootcss.com/element-ui/2.11.1/index.js',
-        'https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js',
-        'https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js',
-        'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js',
-        'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js'
-      ]
+    css: [
+
+    ],
+    js: [
+
+    ]
   }
 }
 
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/permission/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
   outputDir: './dist',
   assetsDir:'static',
   filenameHashing:true, // false 来关闭文件名哈希
@@ -50,24 +41,33 @@ module.exports = {
   devServer: {
     open: true,
     host: '0.0.0.0',
-    port: 8808
-    // 由于本项目数据通过easy-mock和mockjs模拟，不存在跨域问题，无需配置代理;
-    // proxy: { 
-    //   '/v2': {
-    //       target: target,
-    //       changeOrigin: true
-    //   }
-    // }
+    port: 8808,
+    proxy: {
+      '/shop': {
+        target: '43.136.17.41:8080',
+        pathRewrite: {
+          '^/shop': 'http://43.136.17.41:8080'   //重写路径
+          // 此处是大部分文章都不会明说的的地方，
+          // 既然我们设置了代理，则所有请求url都已写成/yourapi/xxx/xxx，那请求如何知道我们到底请求的是哪个服务器的数据呢
+          // 因此这里的意义在于， 以 /yourapi开头的url请求，代理都会知道实际上应该请求那里，
+          // ‘我是服务器/yourapi’，后面的/api根据实际请求地址决定，即我的请求url：/yourapi/test/test，被代理后请求的则是
+          // https://我是服务器/yourapi/test/test
+        },
+        changeOrigin: true
+      }
+
+
+    }
   },
-   // webpack相关配置
+  // webpack相关配置
   chainWebpack: (config) => {
     config.entry.app = ['./src/main.js']
     config.resolve.alias
-      .set('@', resolve('src'))
-      .set('cps', resolve('src/components'))
+    .set('@', resolve('src'))
+    .set('cps', resolve('src/components'))
     // 关闭npm run build之后，This can impact web performance 警告
     config.performance
-      .set('hints', false)
+    .set('hints', false)
     // 移除 prefetch 插件
     config.plugins.delete("prefetch");
     // 移除 preload 插件
@@ -76,17 +76,17 @@ module.exports = {
     config.optimization.minimize(true);
     // 分割代码
     config.optimization.splitChunks({
-        chunks: 'all'
-    })    
+      chunks: 'all'
+    })
     // 对图片进行压缩处理
     config.module
     .rule('images')
     .use('image-webpack-loader')
     .loader('image-webpack-loader')
     .options({
-        disable: true, // webpack@2.x and newer
-        quality: '65-80',
-        speed: 4
+      disable: true, // webpack@2.x and newer
+      quality: '65-80',
+      speed: 4
     })
     .end()
     // 项目文件大小分析
@@ -102,10 +102,10 @@ module.exports = {
     .plugin('html')
     .tap(args => {
       if (process.env.NODE_ENV === 'production') {
-          args[0].cdn = cdn.build
+        args[0].cdn = cdn.build
       }
       if (process.env.NODE_ENV === 'development') {
-          args[0].cdn = cdn.dev
+        args[0].cdn = cdn.dev
       }
       return args
     })
@@ -115,16 +115,16 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       // 忽略生产环境打包的文件
       config.externals = {
-        "vue": "Vue",
-        "vue-router": "VueRouter",
-        "vuex": "Vuex",
-        "vue-i18n": "VueI18n",
-        "axios": "axios",
-        'element-ui': 'ELEMENT',
-        'echarts':'echarts',
-        'mockjs':'Mock',
-        'nprogress':'NProgress',
-        'js-cookie':'Cookies'
+        // "vue": "Vue",
+        // "vue-router": "VueRouter",
+        // "vuex": "Vuex",
+        // "vue-i18n": "VueI18n",
+        // "axios": "axios",
+        // 'element-ui': 'ELEMENT',
+        // 'echarts':'echarts',
+        // 'mockjs':'Mock',
+        // 'nprogress':'NProgress',
+        // 'js-cookie':'Cookies'
       }
       // 去除console来减少文件大小，效果同'UglifyJsPlugin'
       new TerserPlugin({
@@ -156,7 +156,7 @@ module.exports = {
 
     }
   },
-   // 第三方插件配置
+  // 第三方插件配置
   pluginOptions: {
 
   }

@@ -66,16 +66,17 @@ export default {
   getUserInfo:config => {
     let data = JSON.parse(config.body);
     let userList = {};
+    debugger
     if(data.token === 'admin'){
         userList = {
             roles: ['admin'],
-            name:'admin',
+            name: data.name,
             avatar:'https://wx.qlogo.cn/mmopen/vi_32/un2HbJJc6eiaviaibvMgiasFNlVDlNOb9E6WCpCrsO4wMMhHIbsvTkAbIehLwROVFlu8dLMcg00t3ZtOcgCCdcxlZA/132'
         }
     }else if(data.token === 'editor'){
         userList = {
             roles: ['editor'],
-            name:'editor',
+            name: data.name,
             avatar:'https://mirror-gold-cdn.xitu.io/168e088859e325b9d85?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1'
         }
     }else{

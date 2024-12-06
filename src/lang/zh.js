@@ -1,7 +1,7 @@
 const zh = {
     // layout
     commons: {
-      xiaoai: '小爱',
+      xiaoai: '白虎阁',
       admin: '管理员',
       editor: '赵晓编',
       quit: '退出',
@@ -9,7 +9,9 @@ const zh = {
       index: '首页',
       userManage: '用户管理',
       share: '分享功能',
-      infoManage: '信息管理',
+      infoManage: '订单',
+      orderManage: '订单认领',
+      signList: '认领列表',
       infoShow: '个人信息',
       infoShow1: '个人信息子菜单1',
       infoShow2: '个人信息子菜单2',

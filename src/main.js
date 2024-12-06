@@ -9,12 +9,18 @@ import('element-ui/lib/theme-chalk/index.css')
 
 import './components/iconSvg' // iconSvg
 
+
+import CountryFlag from 'vue-country-flag'
+Vue.component('vue-country-flag', CountryFlag)
+
 import '@/permission' // permission control
 
 import '@/mockjs'; // mock数据
 
 // i18n国际化
 import i18n from "@/lang";
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 
 // 分享功能集合
 import { shareConfig } from './utils/share';

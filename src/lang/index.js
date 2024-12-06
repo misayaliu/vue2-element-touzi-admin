@@ -3,7 +3,7 @@
 import { getToken} from '@/utils/auth'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-process.env.NODE_ENV === "development" ? Vue.use(VueI18n) : null;
+process.env.NODE_ENV === "development" ? Vue.use(VueI18n) : Vue.use(VueI18n);
 
 import enLocale from './en'
 import zhLocale from './zh'

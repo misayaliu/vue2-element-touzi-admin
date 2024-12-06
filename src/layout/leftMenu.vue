@@ -1,8 +1,9 @@
 <template>
    <div class="menu_left cflex" :style="{width:sidebar.width+'px'}">
         <div class="menu_page_top rflex">
-            <img :class='["logo",{"closeLogo":!sidebar.opened}]' :src="logo" alt="小爱admin" >
-            <span class='title' v-show="sidebar.opened">{{$t('commons.xiaoai')}}<i>Admin</i></span>
+            <img :class='["logo",{"closeLogo":!sidebar.opened}]' :src="logo" alt="白虎阁" >
+<!--          <i>白虎阁</i>-->
+<!--           <span class='title2' v-show="sidebar.opened"><i>白虎阁</i></span>-->
         </div>
         <div class="menu_page_bottom is-scroll-left">
             <el-menu 
@@ -120,6 +121,12 @@ export default {
                 color:#FF6C60;
             }
         }
+      .title2{
+        font-size: 16px;
+        i{
+          color: #a1fff7;
+        }
+      }
     }
   .menu_page_bottom {
       width:100%;

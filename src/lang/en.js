@@ -1,7 +1,7 @@
 const zh = {
     // layout
     commons: {
-      xiaoai: 'Ai.',
+      xiaoai: '白虎阁',
       admin: 'Admin',
       editor: 'Editor',
       quit: 'Sign Out',
@@ -9,7 +9,9 @@ const zh = {
       index: 'Dashboard',
       userManage: 'Users',
       share: 'Share',
-      infoManage: 'Infos',
+      infoManage: 'Orders',
+      signList: 'SignList',
+      orderManage: 'OrderSign',
       infoShow: 'InfoShow',
       infoShow1: 'InfoShow1',
       infoShow2: 'InfoShow2',

@@ -2,19 +2,19 @@
  * 存储localStorage
  */
 export const setStore = (name, content) => {
-	if (!name) return;
-	if (typeof content !== 'string') {
-		content = JSON.stringify(content);
-	}
-	window.localStorage.setItem(name, content);
+    if (!name) return;
+    if (typeof content !== 'string') {
+        content = JSON.stringify(content);
+    }
+    window.localStorage.setItem(name, content);
 }
 
 /**
  * 获取localStorage
  */
 export const getStore = name => {
-	if (!name) return;
-	var value = window.localStorage.getItem(name);
+    if (!name) return;
+    var value = window.localStorage.getItem(name);
     if (value !== null) {
         try {
             value = JSON.parse(value);
@@ -29,8 +29,8 @@ export const getStore = name => {
  * 删除localStorage
  */
 export const removeStore = name => {
-	if (!name) return;
-	window.localStorage.removeItem(name);
+    if (!name) return;
+    window.localStorage.removeItem(name);
 }
 
 /**
@@ -89,6 +89,22 @@ export const parseToDate = (timeValue) => {
     result = year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     return result;
 }
+
+export const resolvingDate  = (date) =>{
+//date是传入的时间
+    let d = new Date(date);
+
+    let month = (d.getMonth() + 1) < 10 ? '0'+(d.getMonth() + 1) : (d.getMonth() + 1);
+    let day = d.getDate()<10 ? '0'+d.getDate() : d.getDate();
+    let hours = d.getHours()<10 ? '0'+d.getHours() : d.getHours();
+    let min = d.getMinutes()<10 ? '0'+d.getMinutes() : d.getMinutes();
+    let sec = d.getSeconds()<10 ? '0'+d.getSeconds() : d.getSeconds();
+
+    let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
+
+    return times
+}
+
 /**
  * 判断空值
  */
@@ -151,7 +167,7 @@ export const  readFile = file => {
     }
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function (e) { 
+    reader.onload = function (e) {
         var filedata = {
             filename: file.name,
             filebase64: e.target.result
@@ -170,31 +186,31 @@ export const loadStyle = url => {
     link.href = url
     const head = document.getElementsByTagName('head')[0]
     head.appendChild(link)
-  }
-  /**
-   * 设置浏览器头部标题
-   */
-  export const setTitle = (title) => {
-    title = title ? `${title}` : '小爱Admin'
+}
+/**
+ * 设置浏览器头部标题
+ */
+export const setTitle = (title) => {
+    title = title ? `${title}` : '白虎阁'
     window.document.title = title
-  }
+}
 
-  export const param2Obj = url => {
+export const param2Obj = url => {
     const search = url.split('?')[1]
     if (!search) {
-      return {}
+        return {}
     }
     return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-  }
+}
 
-  //是否为正整数
+//是否为正整数
 export const isInteger = (s) => {
     var re = /^[0-9]+$/ ;
     return re.test(s)
-}   
+}
 
 export const setContentHeight = (that,ele,height) => {
     that.$nextTick(() => {
         ele.style.height =   (document.body.clientHeight - height)+'px'
     })
-  }
+}

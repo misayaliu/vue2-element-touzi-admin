@@ -3,8 +3,8 @@
 	  	<transition name="form-fade" mode="in-out">
 	  		<section class="form_contianer">
 			     <div class='titleArea rflex'>
-					<img class="logo" :src="logo" alt="小爱admin">
-					<span class='title'>小爱<i>Admin</i></span>
+					<img class="logo" :src="logo" alt="白虎阁">
+					<span class='title'>白虎阁</span>
 				</div>
 		    	<el-form :model="loginForm" :rules="rules" ref="loginForm" class="loginForm">
 					<el-form-item prop="username" class="login-item">
@@ -18,48 +18,75 @@
 					<el-form-item>
 				    	<el-button type="primary"  @click="submitForm('loginForm')" class="submit_btn">SIGN IN</el-button>
 				  	</el-form-item>
-					<div class="tiparea">
-						<p class="wxtip">温馨提示：</p>
-						<p class="tip">用户名为：admin/editor<span>(可用于切换权限)</span></p>
-						<p class="tip">密码为：123456</p>
-					</div>
-					<div class="sanFangArea">
-						<p class="title">第三方账号登录</p>
-						<ul class="rflex">
-							<li @click="loginByWechat">
-						       <icon-svg icon-class="iconwechat" />
-							</li>
-							<li>
-							    <icon-svg icon-class="iconweibo" />
-							</li>
-							<li>
-							    <icon-svg icon-class="iconGithub" />
-							</li>
-						</ul>
-				    </div>
+<!--					<div class="tiparea">-->
+<!--						<p class="wxtip">温馨提示：</p>-->
+<!--						<p class="tip">用户名为：admin/editor<span>(可用于切换权限)</span></p>-->
+<!--						<p class="tip">密码为：123456</p>-->
+<!--					</div>-->
+<!--					<div class="sanFangArea">-->
+<!--						<p class="title">第三方账号登录</p>-->
+<!--						<ul class="rflex">-->
+<!--							<li @click="loginByWechat">-->
+<!--						       <icon-svg icon-class="iconwechat" />-->
+<!--							</li>-->
+<!--							<li>-->
+<!--							    <icon-svg icon-class="iconweibo" />-->
+<!--							</li>-->
+<!--							<li>-->
+<!--							    <icon-svg icon-class="iconGithub" />-->
+<!--							</li>-->
+<!--						</ul>-->
+<!--				    </div>-->
 				</el-form>
 	  		</section>
 	  	</transition>
-  	</div>
-</template>
 
+      <div class='footer' style="bottom: 0;position: absolute">
+        <p class="intro rflex">
+          <span>{{ $t('commons.xiaoai') }}Admin</span>
+          <a :href='github' target="_blank">
+            <icon-svg icon-class="iconGithub" />
+          </a>
+          <span>diyitongjin2023</span>
+        </p>
+        <p class="beian">粤ICP备2023043241号</p>
+      </div>
+
+  	</div>
+
+
+
+
+</template>
+<script src="../js/axios-0.18.0.js">
+import {defineComponent} from "vue";
+import FooterNav from "@/layout/footerNav.vue";
+
+export default defineComponent({
+  components: {FooterNav}
+})
+</script>
 <script>
 	import logoImg from "@/assets/img/logo.png";
 	import { login } from "@/api/user";
-    import { setToken } from '@/utils/auth'
+  import FooterNav from "@/layout/footerNav.vue";
+  import { setToken } from '@/utils/auth';
+  import axios from 'axios';
+  import {defineComponent} from "vue";
+  import store from "@/store";
 
 	export default {
 	    data(){
 			return {
 				logo:logoImg,
 				loginForm: {
-					username: 'admin',
-					password: '123456'
+					username: '',
+					password: ''
 				},
 				rules: {
 					username: [
 			            { required: true, message: '请输入用户名', trigger: 'blur' },
-						{ min: 2, max: 8, message: '长度在 2 到 8 个字符', trigger: 'blur' }
+						{ min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
 			        ],
 					password: [
 						{ required: true, message: '请输入密码', trigger: 'blur' }
@@ -69,6 +96,7 @@
 		},
 		mounted(){
 		},
+    components: {FooterNav},
 		methods: {
 			loginByWechat(){
 			},
@@ -79,12 +107,27 @@
                 });
             },
 		    submitForm(loginForm) {
+
 				this.$refs[loginForm].validate((valid) => {
+
 					if (valid) {
-						let userinfo = this.loginForm;
+
+            let userinfo = new FormData();
+            userinfo.append('username',this.loginForm.username)
+            userinfo.append('password',this.loginForm.password)
+            // axios.post("/user/login",userinfo).then(function(response){
+            //   console.log(response.data);
+            //   let userList = res.data.userList;
+            //   setToken("Token",userList.token)
+            //   this.$router.push({ path: '/' })
+            //   this.$store.dispatch('initLeftMenu'); //设置左边菜单始终为展开状态
+            // })
+
 						login(userinfo).then(res => {
 							let userList = res.data.userList;
 							setToken("Token",userList.token)
+              setToken("Name",userList.name)
+
 							this.$router.push({ path: '/' })
 							this.$store.dispatch('initLeftMenu'); //设置左边菜单始终为展开状态
 						})
@@ -104,7 +147,7 @@
 		background-size: 100% 100%;
 	}
 	.form_contianer{
-		position: absolute;
+		position: relative;
 		top: 50%;
         left: 50%;
 		transform: translate(-50%,-50%);
